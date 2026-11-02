@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secure Document System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef4fb;
+            color: #1f2937;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #174ea6, #2563eb);
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 34px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 3px;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.75;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            padding: 65px 7% 45px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            color: #123b70;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 20px auto 50px;
+            padding: 0 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(31, 78, 121, 0.10);
+            border: 1px solid #dce7f5;
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            color: #174ea6;
+            margin-bottom: 9px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* ================= MAIN CARDS ================= */
+
+        .section-title {
+            text-align: center;
+            margin: 20px 0 25px;
+        }
+
+        .section-title h2 {
+            color: #123b70;
+            font-size: 28px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            margin-top: 7px;
+        }
+
+
+        .main-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 25px 60px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 7px 22px rgba(31, 78, 121, 0.10);
+            border: 1px solid #dce7f5;
+        }
+
+        .card h3 {
+            color: #174ea6;
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .card-description {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        input[type="file"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            margin-bottom: 17px;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 13px 18px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn-register {
+            background: #2563eb;
+        }
+
+        .btn-register:hover {
+            background: #174ea6;
+        }
+
+        .btn-verify {
+            background: #0f766e;
+        }
+
+        .btn-verify:hover {
+            background: #0b5d57;
+        }
+
+        .btn-history {
+            background: #7c3aed;
+        }
+
+        .btn-history:hover {
+            background: #6222c5;
+        }
+
+
+        /* ================= AUTHENTICATION TEST ================= */
+
+        .authentication-section {
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 25px;
+        }
+
+        .authentication-box {
+            background: linear-gradient(135deg, #ecfeff, #eff6ff);
+            border: 2px solid #38bdf8;
+            border-radius: 18px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 7px 22px rgba(31, 78, 121, 0.10);
+        }
+
+        .authentication-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .authentication-box h2 {
+            color: #123b70;
+            margin-bottom: 12px;
+            font-size: 27px;
+        }
+
+        .authentication-box p {
+            max-width: 720px;
+            margin: auto;
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .authentication-points {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .authentication-point {
+            background: white;
+            color: #174ea6;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid #dce7f5;
+            box-shadow: 0 3px 10px rgba(31, 78, 121, 0.08);
+        }
+
+        .authentication-button {
+            display: inline-block;
+            background: #7c3aed;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .authentication-button:hover {
+            background: #6222c5;
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= WORKFLOW ================= */
+
+        .workflow {
+            max-width: 1100px;
+            margin: 10px auto 60px;
+            padding: 0 25px;
+        }
+
+        .workflow-box {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 7px 22px rgba(31, 78, 121, 0.10);
+            border: 1px solid #dce7f5;
+        }
+
+        .workflow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-circle {
+            width: 48px;
+            height: 48px;
+            margin: auto;
+            border-radius: 50%;
+            background: #e0ecff;
+            color: #174ea6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .step h4 {
+            margin-top: 10px;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .arrow {
+            color: #94a3b8;
+            font-size: 22px;
+        }
+
+
+        /* ================= SECURITY INFO ================= */
+
+        .security-section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 25px 60px;
+        }
+
+        .security-box {
+            background: linear-gradient(135deg, #123b70, #2563eb);
+            color: white;
+            border-radius: 18px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(23, 78, 166, 0.20);
+        }
+
+        .security-box h2 {
+            margin-bottom: 12px;
+        }
+
+        .security-box p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.7;
+            opacity: 0.92;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #123b70;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-steps {
+                flex-direction: column;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🔐
+        </div>
+
+        <div>
+
+            <h1>Secure Document System</h1>
+
+            <p>
+                Document Integrity • Tamper Detection • Authentication
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#register">Register</a>
+
+        <a href="#verify">Verify</a>
+
+        <a href="/history">History</a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <h2>
+        Secure Your Documents with
+        <span>Digital Integrity</span>
+    </h2>
+
+    <p>
+        A secure document verification system that uses
+        SHA-512 hashing, RSA digital signatures and
+        document comparison to detect unauthorized changes
+        and verify document authenticity.
+    </p>
+
+</section>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            
+        </div>
+
+        <h3>SHA-512 Security</h3>
+
+        <p>
+            Generates a unique SHA-512 hash for every
+            registered document.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            
+        </div>
+
+        <h3>Digital Signature</h3>
+
+        <p>
+            RSA digital signatures help verify the
+            authenticity of registered documents.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            
+        </div>
+
+        <h3>Tamper Detection</h3>
+
+        <p>
+            Detects changes by comparing the current
+            document with its registered version.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= MAIN ACTIONS ================= -->
+
+<div class="section-title">
+
+    <h2>Document Security</h2>
+
+    <p>
+        Register a new document or verify an existing document.
+    </p>
+
+</div>
+
+
+<div class="main-container">
+
+    <div class="cards">
+
+
+        <!-- REGISTER -->
+
+        <div class="card" id="register">
+
+            <h3>
+                 Register Document
+            </h3>
+
+            <p class="card-description">
+                Upload your original document to generate
+                its SHA-512 hash and digital signature.
+            </p>
+
+
+            <form
+                action="/upload"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                <label>
+                    Select Document
+                </label>
+
+                <!-- IMPORTANT: keep name="file" -->
+
+                <input
+                    type="file"
+                    name="file"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn btn-register"
+                >
+                    Register Document
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- VERIFY -->
+
+        <div class="card" id="verify">
+
+            <h3>
+                 Verify Document
+            </h3>
+
+            <p class="card-description">
+                Upload a document and compare it with the
+                registered version to detect tampering.
+            </p>
+
+
+            <form
+                action="/verify"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                <label>
+                    Document ID
+                </label>
+
+                <input
+                    type="number"
+                    name="document_id"
+                    placeholder="Enter Document ID"
+                    required
+                >
+
+
+                <label>
+                    Select Document
+                </label>
+
+                <!-- IMPORTANT: keep name="file" -->
+
+                <input
+                    type="file"
+                    name="file"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn btn-verify"
+                >
+                    Verify Document
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= AUTHENTICATION TEST ================= -->
+
+<section class="authentication-section">
+
+    <div class="authentication-box">
+
+        <div class="authentication-icon">
+            
+        </div>
+
+        <h2>
+            Authentication Test
+        </h2>
+
+        <p>
+            Verify the RSA digital signature of a registered
+            document and confirm whether the document is authentic.
+        </p>
+
+        <div class="authentication-points">
+
+            <div class="authentication-point">
+                 RSA Digital Signature
+            </div>
+
+            <div class="authentication-point">
+                 Signature Verification
+            </div>
+
+            <div class="authentication-point">
+                 Authenticity Check
+            </div>
+
+        </div>
+
+        <a
+            href="#verify"
+            class="authentication-button"
+        >
+             Test Authentication
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= WORKFLOW ================= -->
+
+<section class="workflow">
+
+    <div class="section-title">
+
+        <h2>Security Workflow</h2>
+
+        <p>
+            How the Secure Document System works
+        </p>
+
+    </div>
+
+
+    <div class="workflow-box">
+
+        <div class="workflow-steps">
+
+
+            <div class="step">
+
+                <div class="step-circle">
+                    1
+                </div>
+
+                <h4>
+                    Register Document
+                </h4>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-circle">
+                    2
+                </div>
+
+                <h4>
+                    Generate Hash
+                </h4>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-circle">
+                    3
+                </div>
+
+                <h4>
+                    Digital Signature
+                </h4>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-circle">
+                    4
+                </div>
+
+                <h4>
+                    Verify Document
+                </h4>
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-circle">
+                    5
+                </div>
+
+                <h4>
+                    View Result
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SECURITY INFORMATION ================= -->
+
+<section class="security-section">
+
+    <div class="security-box">
+
+        <h2>
+             Multi-Layer Document Security
+        </h2>
+
+        <p>
+            Your document is protected through cryptographic
+            hashing, RSA digital signatures, authenticity
+            verification, tamper detection and verification
+            history.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= QUICK ACCESS ================= -->
+
+<div class="main-container">
+
+    <div class="card" style="text-align:center;">
+
+        <h3>
+             Verification History
+        </h3>
+
+        <p class="card-description">
+            View previous security checks and see whether
+            documents were authentic or tampered.
+        </p>
+
+
+        <a
+            href="/history"
+            class="btn btn-history"
+        >
+            View Verification History
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    Secure Document Integrity, Tamper Detection &
+    Authentication System
+
+    <br><br>
+
+    B.Tech Project
+
+</footer>
+
+
+</body>
+
+</html>
